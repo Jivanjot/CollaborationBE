@@ -1,6 +1,7 @@
 package com.collaboration.daoimpl;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.transaction.Transactional;
 
@@ -16,8 +17,13 @@ public class BlogDaoImpl implements BlogDao {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	Random rand=new Random();
 	public boolean addBlog(Blog blog) {
 		try {
+			blog.setBlogId(rand.nextInt(100)+1);
+			blog.setCreateDate(new java.util.Date());
+			blog.setLikes(0);
+			blog.setStatus("NA");
 			sessionFactory.getCurrentSession().save(blog);
 			return true;
 		} catch (Exception e) {
@@ -35,14 +41,6 @@ public class BlogDaoImpl implements BlogDao {
 		}
 	}
 
-	public boolean updateBlog(Blog blog) {
-		try {
-			sessionFactory.getCurrentSession().update(blog);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
 
 	public List<Blog> listApprovedBlogs() {
 		try {
@@ -53,8 +51,9 @@ public class BlogDaoImpl implements BlogDao {
 		}
 	}
 
-	public boolean approveBlog(Blog blog) {
+	public boolean approveBlog(int blogId) {
 		try {
+			Blog blog=this.getBlog(blogId);
 			blog.setStatus("A"); // Specifying the status of the Blog as A which means Approved
 			sessionFactory.getCurrentSession().update(blog); // updating the blog
 			return true;
@@ -64,8 +63,9 @@ public class BlogDaoImpl implements BlogDao {
 
 	}
 
-	public boolean rejectBlog(Blog blog) {
+	public boolean rejectBlog(int blogId) {
 		try {
+			Blog blog=this.getBlog(blogId);
 			blog.setStatus("NA");
 			sessionFactory.getCurrentSession().update(blog); // updating blog
 			return true;
@@ -93,10 +93,11 @@ public class BlogDaoImpl implements BlogDao {
 		}
 	}
 
-	public boolean incrementLike(Blog blog) {
+	public boolean incrementLike(int blogId) {
 		try {
-			int likes = blog.getLikes();
-			likes++;
+      Blog      blog=  this.getBlog(blogId);
+		int likes=blog.getLikes();	
+          likes++;
 			blog.setLikes(likes);
 			sessionFactory.getCurrentSession().update(blog); // updating the blog
 			return true;

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
@@ -14,11 +15,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Component
 @Entity
-@SequenceGenerator(name="forumid_seq",sequenceName="forumidseq")
+//@SequenceGenerator(name="forumid_seq",sequenceName="forumidseq")
+@Table(name="c_forum")
 public class Forum {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="forumid_seq")
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="forumid_seq")
     private int forumId;
 	
 	private String forumName;

@@ -10,12 +10,12 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 @Component
 @Entity
-@SequenceGenerator(name="myfriendidseq",sequenceName="friendidseq")
+//@SequenceGenerator(name="myfriendidseq",sequenceName="friendidseq")
 @Table(name="c_friend")
 public class Friend {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="myfriendidseq")
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="myfriendidseq")
 	private int friendId;
 	private String loginName;
 	private String friendLoginName;

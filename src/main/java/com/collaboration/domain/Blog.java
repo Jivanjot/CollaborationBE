@@ -15,12 +15,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Component
 @Entity
-@SequenceGenerator(name = "blogidseq", sequenceName = "myblog_seq")
+//@SequenceGenerator(name = "blogidseq", sequenceName = "myblog_seq")
 @Table(name = "c_blog")
 public class Blog {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blogidseq")
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blogidseq")
 	private int blogId;
 
 	private String blogName;

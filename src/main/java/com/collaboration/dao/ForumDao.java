@@ -14,5 +14,6 @@ public interface ForumDao {
 	public boolean approveForum(int forumId);
 	public boolean rejectForum(int forumId);
 	public Forum getForum(int forumId);
+	public boolean incLikes(int forumId);
 
 }
